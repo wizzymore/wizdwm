@@ -1,13 +1,19 @@
 #!/bin/sh
 
-feh --bg-fill ~/Pictures/wall/chad.png &
+# feh --bg-fill ~/Pictures/wall/chad.png &
+
+nitrogen --restore &
+
+# I need this to move the monitors correctly, you might not need this!
+xrandr --output DP-1 --primary --left-of HDMI-0
 
 xrdb merge ~/Public/xresources/ocean/.Xresources &
 
 picom & 
 
-xbacklight -set 10 &
+# Uncomment this if you have a laptop and change it as you prefer for the initial screen light
+# xbacklight -set 10 &
 
-~/.dwm/bars/onedark.sh &
+~/.dwm/bars/nord.sh &
 
 dwm
