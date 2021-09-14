@@ -33,6 +33,7 @@ https://user-images.githubusercontent.com/59060246/128050994-17f46934-6604-4430-
 - [wallpaper](<img src="https://github.com/siduck76/chadwm/blob/screenshots/screenshots/chad.png">)
 # Credits 
 
+- [siduck76](https://github.com/siduck76) who started this project
 - HUGE THANKS to [eProTaLT83](https://www.reddit.com/user/eProTaLT83). I wanted certain features in dwm like tabbar in monocle , tagpreview etc and he implemented my ideas and created patches for me! I   cant even count the number of times he has helped me :v 
 - @fitrh helped with [colorful tag patch](https://github.com/fitrh/dwm/issues/1)
 
