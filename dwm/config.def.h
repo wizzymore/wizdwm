@@ -1,7 +1,10 @@
 /* See LICENSE file for copyright and license details. */
 
 #define XF86MonBrightnessDown 0x1008ff03
-#define XF86MonBrightnessUp 0x1008ff02
+#define XF86MonBrightnessUp   0x1008ff02
+#define XF86AudioLowerVolume  0x1008ff11
+#define XF86AudioMute         0x1008ff12
+#define XF86AudioRaiseVolume  0x1008ff13
 
 /* appearance */
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
@@ -121,13 +124,16 @@ static const Layout layouts[] = {
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 /* commands */
-static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", NULL };
-static const char *termcmd[]  = {  "kitty", NULL }; // change this to your term
-static const char *rofi[] = {"rofi", "-show", "drun", NULL };
+static char dmenumon[2] =           "0"; /* component of dmenucmd, manipulated in spawn() */
+static const char *dmenucmd[] =     { "dmenu_run", NULL };
+static const char *termcmd[]  =     { "kitty",     NULL }; // change this to your term
+static const char *rofi[] =         {"rofi",       "-show", "drun",   NULL };
 static const char *layoutmenu_cmd = "/home/cristian/.dwm/layoutmenu.sh";
-static const char *xi[] = {"xbacklight", "-inc", "7", NULL};
-static const char *xd[] = {"xbacklight", "-dec", "7", NULL};
+static const char *xi[] =           {"xbacklight", "-inc",  "7",      NULL };
+static const char *xd[] =           {"xbacklight", "-dec",  "7",      NULL };
+static const char *voli[] =         {"amixer",     "set",   "Master", "5%+",     NULL};
+static const char *vold[] =         {"amixer",     "set",   "Master", "5%-",     NULL};
+static const char *volm[] =         {"amixer",     "set",   "Master", "toggle", NULL};
 
 static Key keys[] = {
     /* modifier                     key                     function        argument */
@@ -142,6 +148,9 @@ static Key keys[] = {
     {MODKEY,                        XK_u,                   spawn,          SHCMD("maim --select | xclip -selection clipboard -t image/png")},
     {0,                             XF86MonBrightnessDown,  spawn,          {.v = xd}},
     {0,                             XF86MonBrightnessUp,    spawn,          {.v = xi}},
+    {0,                             XF86AudioLowerVolume,   spawn,          {.v = vold}},
+    {0,                             XF86AudioRaiseVolume,   spawn,          {.v = voli}},
+    {0,                             XF86AudioMute,          spawn,          {.v = volm}},
     { MODKEY,                       XK_b,                   togglebar,      {0} },
     { MODKEY|ControlMask,           XK_w,                   tabmode,        { -1 } },
     { MODKEY,                       XK_j,                   focusstack,     {.i = +1 } },
