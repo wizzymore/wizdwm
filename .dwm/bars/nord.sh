@@ -14,8 +14,8 @@ update_icon() {
 }
 
 pkg_updates() {
-  updates=$(doas xbps-install -un | wc -l) # void
-  # updates=$(checkupdates | wc -l)   # arch , needs pacman contrib
+  # updates=$(doas xbps-install -un | wc -l) # void
+  updates=$(checkupdates | wc -l)   # arch , needs pacman contrib
   # updates=$(aptitude search '~U' | wc -l)  # apt (ubuntu,debian etc)
 
   if [ -z "$updates" ]; then
@@ -56,7 +56,12 @@ wlan() {
 
 clock() {
   printf "^c#2E3440^ ^b#828dd1^ 󱑆 "
-  printf "^c#2E3440^^b#6c77bb^ $(date '+%a, %I:%M %p') "
+  printf "^c#2E3440^ ^b#6c77bb^ $(date '+%a, %I:%M %p') "
+}
+
+volume() {
+  printf "^c#D8DEE9^ ^b#BF616A^ VOL"
+  printf "^c#abb2bf^ ^b#414753^ $(amixer get Master |grep % |awk '{print $5}'|sed 's/[^0-9\%]//g')"
 }
 
 while true; do
@@ -64,5 +69,5 @@ while true; do
   [ $interval == 0 ] || [ $(($interval % 3600)) == 0 ] && updates=$(pkg_updates)
   interval=$((interval + 1))
 
-  sleep 1 && xsetroot -name "$(update_icon) $updates $(batt) $(brightness) $(cpu) $(mem) $(wlan) $(clock)"
+  sleep 1 && xsetroot -name "$(update_icon) $updates (batt) $(volume) $(cpu) $(mem) $(wlan) $(clock)"
 done
