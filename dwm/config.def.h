@@ -74,11 +74,11 @@ static const Rule rules[] = {
      *	WM_NAME(STRING) = title
      */
     /* class      instance    title       tags mask     iscentered   isfloating   monitor */
-	{ "Gimp",     NULL,       NULL,       0,            0,           1,           -1 },
-	{ "Firefox",  NULL,       NULL,       2,            0,           0,           -1 },
+    { "Gimp",     NULL,       NULL,       0,            0,           1,           -1 },
+    { "Firefox",  NULL,       NULL,       2,            0,           0,           -1 },
     { "eww",      NULL,       NULL,       0,            0,           1,           -1 },
     { "code:oss", NULL,       NULL,       3,            0,           0,           -1 },
-    { "URxvt",    NULL,       NULL,       1,            0,           0,           -1 },
+    { "kitty",    NULL,       NULL,       1,            0,           0,           -1 },
 };
 
 /* layout(s) */
@@ -123,7 +123,7 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", NULL };
-static const char *termcmd[]  = {  "urxvt", NULL }; // change this to your term
+static const char *termcmd[]  = {  "kitty", NULL }; // change this to your term
 static const char *rofi[] = {"rofi", "-show", "drun", NULL };
 static const char *layoutmenu_cmd = "/home/cristian/.dwm/layoutmenu.sh";
 static const char *xi[] = {"xbacklight", "-inc", "7", NULL};
@@ -189,7 +189,7 @@ static Key keys[] = {
     { MODKEY|ControlMask,           XK_g,                   setlayout,      {.v = &layouts[10]} },
     { MODKEY|ControlMask|ShiftMask, XK_t,                   setlayout,      {.v = &layouts[13]} },
     { MODKEY,                       XK_space,               setlayout,      {0} },
-    { MODKEY|ControlMask,		    XK_comma,               cyclelayout,    {.i = -1 } },
+    { MODKEY|ControlMask,           XK_comma,               cyclelayout,    {.i = -1 } },
     { MODKEY|ControlMask,           XK_period,              cyclelayout,    {.i = +1 } },
     { MODKEY|ShiftMask,             XK_space,               togglefloating, {0} },
     { MODKEY,                       XK_f,                   togglefullscr,  {0} },
@@ -199,9 +199,9 @@ static Key keys[] = {
     { MODKEY,                       XK_period,              focusmon,       {.i = +1 } },
     { MODKEY|ShiftMask,             XK_comma,               tagmon,         {.i = -1 } },
     { MODKEY|ShiftMask,             XK_period,              tagmon,         {.i = +1 } },
-    { MODKEY|ShiftMask,             XK_minus, 		        setborderpx,    {.i = -1 } },
-    { MODKEY|ShiftMask,             XK_p, 	                setborderpx,    {.i = +1 } },
-    { MODKEY|ShiftMask,             XK_w, 	                setborderpx,    {.i = default_border } },
+    { MODKEY|ShiftMask,             XK_minus, 		    setborderpx,    {.i = -1 } },
+    { MODKEY|ShiftMask,             XK_p, 	            setborderpx,    {.i = +1 } },
+    { MODKEY|ShiftMask,             XK_w, 	            setborderpx,    {.i = default_border } },
 
     TAGKEYS(                        XK_1,                   0)
     TAGKEYS(                        XK_2,                   1)
@@ -231,20 +231,19 @@ static Button buttons[] = {
     { ClkWinTitle,          0,              Button2,        zoom,           {0} },
     { ClkStatusText,        0,              Button2,        spawn,          {.v = termcmd } },
 
-		/* Keep movemouse? */
+    /* Keep movemouse? */
     /* { ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} }, */
-
-		/* placemouse options, choose which feels more natural:
-		 *    0 - tiled position is relative to mouse cursor
-		 *    1 - tiled postiion is relative to window center
-		 *    2 - mouse pointer warps to window center
-		 *
-		 * The moveorplace uses movemouse or placemouse depending on the floating state
-		 * of the selected client. Set up individual keybindings for the two if you want
-		 * to control these separately (i.e. to retain the feature to move a tiled window
-		 * into a floating position).
-		 */
-	{ ClkClientWin,         MODKEY,         Button1,        moveorplace,    {.i = 0} },
+    /* placemouse options, choose which feels more natural:
+    *    0 - tiled position is relative to mouse cursor
+    *    1 - tiled postiion is relative to window center
+    *    2 - mouse pointer warps to window center
+    *
+    * The moveorplace uses movemouse or placemouse depending on the floating state
+    * of the selected client. Set up individual keybindings for the two if you want
+    * to control these separately (i.e. to retain the feature to move a tiled window
+    * into a floating position).
+    */
+    { ClkClientWin,         MODKEY,         Button1,        moveorplace,    {.i = 0} },
     { ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },
     { ClkClientWin,         MODKEY,         Button3,        resizemouse,    {0} },
     { ClkClientWin,         ControlMask,    Button1,        dragmfact,      {0} },
